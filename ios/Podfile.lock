@@ -1,0 +1,34 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_webview_plugin (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - url_launcher (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_webview_plugin:
+    :path: ".symlinks/plugins/flutter_webview_plugin/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
+  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+
+PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
+
+COCOAPODS: 1.8.4

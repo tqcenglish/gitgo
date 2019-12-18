@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gitgo/common/emums.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../common/config.dart';
 
@@ -44,7 +43,6 @@ class _SettingPageState extends State<SettingPage> {
     firstPages.forEach((page, name) {
       items.add(ListTile(
         title: Text(name),
-
         onTap: () {
           model.firstPage = page;
           sharedPreferences.setString("firstPage", page.toString());

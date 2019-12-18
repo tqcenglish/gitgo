@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:gitgo/common/route.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/auth.dart';
 import '../common/config.dart';
-import '../common/emums.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -27,7 +27,9 @@ class _LoginPageState extends State<LoginPage> {
       refs.setString("password", _password);
 
       routeToFirstPage(context);
+      return;
     }
+    showToast("登录失败", position: ToastPosition(align: Alignment.bottomCenter));
   }
 
   Widget avatarImage() {
@@ -72,6 +74,11 @@ class _LoginPageState extends State<LoginPage> {
                 ButtonBar(
                   children: <Widget>[
                     RaisedButton(
+                      color: Colors.blue,
+                      highlightColor: Colors.blue[700],
+                      colorBrightness: Brightness.dark,
+                      splashColor: Colors.grey,
+                      shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                       child: Text("登陆"),
                       onPressed: () {
                         _login(context);

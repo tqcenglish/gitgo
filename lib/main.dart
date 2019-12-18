@@ -4,7 +4,6 @@ import 'package:oktoast/oktoast.dart';
 
 import 'api/auth.dart';
 import 'common/config.dart';
-import 'common/emums.dart';
 import 'common/route.dart';
 import 'page/login.dart';
 import 'page/start.dart';
@@ -14,19 +13,23 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // 读取配置信息
     loadSharedPreferences();
     return ScopedModel<SettingModel>(
         model: settingModel,
         child: new ScopedModelDescendant<SettingModel>(
             builder: (context, child, model) {
-          return OKToast(
+            return OKToast(
               child: MaterialApp(
-            title: appTitle,
-            home: MainPage(),
-            routes: mainRoutes,
-            theme: ThemeData(primarySwatch: model.themeColor),
-          ));
-        }));
+                title: appTitle,
+                home: MainPage(),
+                routes: mainRoutes,
+                theme: ThemeData(primarySwatch: model.themeColor),
+              )
+          );
+        }
+      )
+    );
   }
 }
 

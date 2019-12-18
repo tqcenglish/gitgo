@@ -3,6 +3,7 @@ import 'package:github/server.dart';
 import 'package:gitgo/util/date.dart';
 
 import '../common/emums.dart';
+import '../util/icon.dart';
 
 class ActivityListItem extends StatelessWidget {
   final Event _event;
@@ -52,18 +53,19 @@ class ActivityListItem extends StatelessWidget {
       case "CreateEvent":
         return Icon(
           Icons.add_circle,
-          size: 16,
+          size: 18,
+          color: Colors.blue,
         );
       case "WatchEvent":
-        return Icon(Icons.star, size: 16);
+        return Icon(Icons.star, size: 18, color: Colors.green);
       case "ForkEvent":
-        return Icon(Icons.call_split, size: 16);
+        return Icon(Icons.call_split, size: 18, color: Colors.green);
       case "IssuesEvent":
-        return Icon(Icons.help, size: 16);
+        return Icon(Icons.help, size: 18, color: Colors.red);
       case "IssueCommentEvent":
-        return Icon(Icons.comment, size: 16);
+        return Icon(Icons.comment, size: 18, color: Colors.red);
       case "PullRequestEvent":
-        return Icon(Icons.settings_ethernet, size: 16);
+        return Icon(Icons.settings_ethernet, size: 18, color: Colors.red);
       default:
         return Text(eventType);
     }
@@ -73,7 +75,7 @@ class ActivityListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: Image.network(_event?.actor?.avatarUrl ?? ""),
+      leading: leadingIcon(_event?.actor?.avatarUrl ?? ""),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,12 +84,16 @@ class ActivityListItem extends StatelessWidget {
           Text(beforeNow(_event?.createdAt))
         ],
       ),
-      subtitle: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
+      subtitle: Wrap(
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.end,
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
+          Text(
+            _event?.repo?.name ?? "",
+            style: TextStyle(fontSize: 16),
+          ),
           _eventIcon(_event?.type ?? ""),
-          Text(_event?.repo?.name ?? "", style: TextStyle(fontSize: 10),)
         ],
       ),
       onLongPress: () {

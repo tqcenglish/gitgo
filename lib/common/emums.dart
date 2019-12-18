@@ -24,12 +24,21 @@ enum Pages {
   GistDetail,
 }
 
-enum Repos { Mine, Starred, Topic, User}
+enum Repos { Mine, Starred, Topic, User }
 
-enum Users { Follower, Following, Stargazer, Watcher}
+enum Users { Follower, Following, Stargazer, Watcher }
 
-enum Gists {Mine, User}
+enum Gists { Mine, User }
 
-enum FirstPage {Profile, Activity, Issue, Notification, MineRepo, StarredRepo, Bookmark, Topic}
+enum FirstPage {
+  Profile,
+  Activity,
+  Issue,
+  Notification,
+  MineRepo,
+  StarredRepo,
+  Bookmark,
+  Topic
+}
 
-enum BookmarkType {User, Repository}
+enum BookmarkType { User, Repository }

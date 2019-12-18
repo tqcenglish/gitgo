@@ -4,6 +4,7 @@ import 'package:github/server.dart' as github;
 import '../api/base.dart';
 import '../common/config.dart';
 import '../widget/indicator.dart';
+import '../widget/bottombar.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -45,6 +46,7 @@ class _NotificationPageState extends State<NotificationPage> {
         child: ListView.builder(
             itemCount: _notifications.length, itemBuilder: _createItem),
       ),
+      bottomNavigationBar: BottomBar(selectedIndex: 2),
     );
   }
 }

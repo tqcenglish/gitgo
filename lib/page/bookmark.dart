@@ -4,6 +4,7 @@ import 'package:github/server.dart';
 import '../api/base.dart';
 import '../common/config.dart';
 import '../common/emums.dart';
+import '../widget/bottombar.dart';
 import '../model/bookmark.dart';
 
 class BookmarkPage extends StatefulWidget {
@@ -85,6 +86,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
         itemCount: _bookmarks.length,
         itemBuilder: _createItem,
       ),
+      bottomNavigationBar: BottomBar(selectedIndex: 3),
     );
   }
 }

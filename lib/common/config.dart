@@ -9,10 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../widget/drawer.dart';
 import 'emums.dart';
 
-String appTitle = "Git Go!";
-CurrentUser currentUser = null;
+String appTitle = "GitHub Client";
+
+CurrentUser currentUser;
+SharedPreferences sharedPreferences;
+
 const Widget MainDrawer = const NavDrawer();
-SharedPreferences sharedPreferences = null;
 SettingModel settingModel = new SettingModel();
 List<Bookmark> bookmarks = List();
 

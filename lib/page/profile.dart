@@ -3,6 +3,7 @@ import 'package:gitgo/common/emums.dart';
 import 'package:gitgo/model/bookmark.dart';
 import 'package:gitgo/widget/tabbar.dart';
 import 'package:github/server.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/base.dart';
 import '../api/service.dart';
@@ -20,13 +21,13 @@ class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
+  String _currentUserName;
   String _userName = "";
-  User _user = null;
+  User _user;
   List<Event> _events = List();
   bool _eventLoaded = false;
   List<Repository> _repos = List();
   bool _repoLoaded = false;
-  bool _userLoaded = false;
   bool _isBookmarked = false;
 
   _ProfilePageState() {
@@ -40,6 +41,7 @@ class _ProfilePageState extends State<ProfilePage>
       _userName = userName;
     });
 
+    _getCurrentUser();
     _loadUserData();
     _loadEventData();
     _loadRepoData();
@@ -50,9 +52,7 @@ class _ProfilePageState extends State<ProfilePage>
   void _loadUserData() async {
     _user = await defaultClient.users.getUser(_userName);
     if (mounted) {
-      setState(() {
-        _userLoaded = true;
-      });
+      setState(() {});
     }
   }
 
@@ -103,26 +103,33 @@ class _ProfilePageState extends State<ProfilePage>
     });
   }
 
+  void _getCurrentUser() async {
+    var refs = await SharedPreferences.getInstance();
+    _currentUserName = refs.getString("username");
+  }
+
   @override
   Widget build(BuildContext context) {
+    var actions = <Widget>[];
+    if (_currentUserName != _userName) {
+      actions.add(IconButton(
+        icon: Icon(_isBookmarked ? Icons.bookmark : Icons.bookmark_border),
+        onPressed: () {
+          var bookmark = Bookmark(BookmarkType.User)..user = _userName;
+          if (_isBookmarked) {
+            delBookmark(bookmark);
+          } else {
+            addBookmark(bookmark);
+          }
+          _loadIsBookmarked();
+        },
+      ));
+    }
+
     return Scaffold(
         appBar: AppBar(
-          title: Text("个人主页"),
-          actions: <Widget>[
-            IconButton(
-              icon:
-                  Icon(_isBookmarked ? Icons.bookmark : Icons.bookmark_border),
-              onPressed: () {
-                var bookmark = Bookmark(BookmarkType.User)..user = _userName;
-                if (_isBookmarked) {
-                  delBookmark(bookmark);
-                } else {
-                  addBookmark(bookmark);
-                }
-                _loadIsBookmarked();
-              },
-            )
-          ],
+          title: Text("主页信息"),
+          actions: actions,
           bottom: SizedTabBar(
             controller: _tabController,
             tabs: <Widget>[

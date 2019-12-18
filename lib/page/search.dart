@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gitgo/common/emums.dart';
 import 'package:gitgo/widget/tabbar.dart';
 import 'package:github/server.dart';
-
+import '../widget/bottombar.dart';
 import '../api/base.dart';
 import '../common/config.dart';
 import '../widget/indicator.dart';
@@ -59,7 +59,7 @@ class _SearchPageState extends State<SearchPage>
 
   Widget _createUserItem(BuildContext context, int index) {
     var user = _users[index];
-    print(user);
+    print("user $user");
     return Card(
       child: ListTile(
         contentPadding: EdgeInsets.all(10),
@@ -101,7 +101,7 @@ class _SearchPageState extends State<SearchPage>
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(color: Colors.white),
           controller: _textEditingController,
           autofocus: true,
           onSubmitted: (value) {
@@ -149,6 +149,7 @@ class _SearchPageState extends State<SearchPage>
           )
         ],
       ),
+      bottomNavigationBar: BottomBar(selectedIndex: 1),
     );
   }
 }
