@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../common/config.dart';
 import '../common/emums.dart';
-import 'activity.dart';
-import 'bookmark.dart';
-import 'issue.dart';
-import 'notification.dart';
-import 'profile.dart';
-import 'repository.dart';
-import 'search.dart';
+import './tabbar/activity.dart';
+import './tabbar/bookmark.dart';
+import './tabbar/notification.dart';
+import './tabbar/search.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,41 +13,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Pages _body = Pages.Activity;
+  PageController _myPage;
+  var selectedPage;
 
-  navTo(Pages page) {
-    setState(() {
-      _body = page;
-    });
-    Navigator.pop(context);
+  @override
+  void initState() {
+    super.initState();
+    _myPage = PageController(initialPage: 0);
+    selectedPage = 0;
   }
 
-  _createBody() {
-    switch (_body) {
-      case Pages.Activity:
-        return ActivityPage();
-      case Pages.Issue:
-        return IssuePage();
-      case Pages.Notification:
-        return NotificationPage();
-      case Pages.UserRepo:
-        return RepositoryPage(Repos.User);
-      case Pages.MineRepo:
-        return RepositoryPage(Repos.Mine);
-      case Pages.StarredRepo:
-        return RepositoryPage(Repos.Starred);
-      case Pages.Profile:
-        return ProfilePage();
-      case Pages.Bookmark:
-        return BookmarkPage();
-      case Pages.Search:
-        return SearchPage();
-      default:
-        return Center(
-          child: Text("Open page from drawer."),
-        );
-    }
-  }
+  // navTo(Pages page) {
+  //
+  //   Navigator.pop(context);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +35,36 @@ class _HomePageState extends State<HomePage> {
         title: Text(appTitle),
       ),
       drawer: MainDrawer,
-      body: _createBody(),
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _myPage,
+        children: <Widget>[
+          ActivityPage(),
+          SearchPage(),
+          NotificationPage(),
+          BookmarkPage(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        // 底部导航
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('活动')),
+          BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('搜索')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), title: Text('通知')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bookmark), title: Text('书签')),
+        ],
+        currentIndex: selectedPage,
+        fixedColor: Colors.blue,
+        onTap: (int index) {
+          setState(() {
+            selectedPage = index;
+          });
+          _myPage.jumpToPage(index);
+        },
+      ),
     );
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:github/server.dart';
 
-import '../api/service.dart';
-import '../common/config.dart';
-import '../widget/activity_item.dart';
-import '../widget/indicator.dart';
-import '../widget/bottombar.dart';
+import '../../api/service.dart';
+import '../../common/config.dart';
+import '../../widget/activity_item.dart';
+import '../../widget/indicator.dart';
 
 class ActivityPage extends StatefulWidget {
   @override
@@ -45,17 +44,12 @@ class _ActivityPageState extends State<ActivityPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("活动"),
-      ),
-      drawer: MainDrawer,
-      body: IndicatorContainer(
+    return Container(
+      child: IndicatorContainer(
         showChild: _loaded,
         child: ListView.builder(
             itemCount: _events.length, itemBuilder: _createItem),
       ),
-      bottomNavigationBar: BottomBar(selectedIndex: 0),
     );
   }
 }

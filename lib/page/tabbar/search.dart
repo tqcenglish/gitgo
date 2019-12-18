@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gitgo/common/emums.dart';
 import 'package:gitgo/widget/tabbar.dart';
 import 'package:github/server.dart';
-import '../widget/bottombar.dart';
-import '../api/base.dart';
-import '../common/config.dart';
-import '../widget/indicator.dart';
-import '../widget/repo_item.dart';
+import '../../api/base.dart';
+import '../../widget/indicator.dart';
+import '../../widget/repo_item.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -100,6 +98,7 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: TextField(
           style: TextStyle(color: Colors.white),
           controller: _textEditingController,
@@ -129,7 +128,6 @@ class _SearchPageState extends State<SearchPage>
           ],
         ),
       ),
-      drawer: MainDrawer,
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
@@ -149,7 +147,6 @@ class _SearchPageState extends State<SearchPage>
           )
         ],
       ),
-      bottomNavigationBar: BottomBar(selectedIndex: 1),
     );
   }
 }

@@ -48,8 +48,7 @@ class NavDrawer extends StatelessWidget {
             style: TextStyle(fontSize: 18.0),
           ),
           onTap: () {
-            Navigator.of(context)
-                .pushReplacementNamed(Pages.Activity.toString());
+            Navigator.of(context).pushReplacementNamed(Pages.Home.toString());
           },
         ),
         ListTile(

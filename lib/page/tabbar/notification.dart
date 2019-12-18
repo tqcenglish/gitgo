@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:github/server.dart' as github;
 
-import '../api/base.dart';
-import '../common/config.dart';
-import '../widget/indicator.dart';
-import '../widget/bottombar.dart';
+import '../../api/base.dart';
+import '../../common/config.dart';
+import '../../widget/indicator.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -36,17 +35,12 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("通知"),
-      ),
-      drawer: MainDrawer,
-      body: IndicatorContainer(
+    return Container(
+      child: IndicatorContainer(
         showChild: _loaded,
         child: ListView.builder(
             itemCount: _notifications.length, itemBuilder: _createItem),
       ),
-      bottomNavigationBar: BottomBar(selectedIndex: 2),
     );
   }
 }
